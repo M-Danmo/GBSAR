@@ -14,49 +14,110 @@
 
 </head>
 <body>
+    
     <a-scene
-    mindar-image="imageTargetSrc: Targets.mind; maxTrack: 2;"
+    mindar-image="imageTargetSrc: Targets.mind; maxTrack: 5;"
     embedded
     vr-mode-ui="enabled: false"
     device-orientation-permission-ui="enabled: false">
 
     <a-assets>
-        <img id="WelcomeToGBS" src="WelcomeToGBS.png">
-        <img id="YouAreStuckHereForever" src="YouAreStuckHereForever.png">
+        <img id="lostMessage" src="Assets\Lost\LostMessage.png">
+        <img id="welcome1" src="Assets\Mission1\LocateBloomberg1.png">
+        <img id="welcome2" src="Assets\Mission1\LocateBloomberg2.png">
+        <img id="welcome3" src="Assets\Mission1\LocateBloomberg3.png">
+        <img id="welcome4" src="Assets\Mission1\LocateBloomberg4A.png">
+        <img id="welcome5" src="Assets\Mission1\LocateBloomberg4B.png">
     </a-assets>
+    
+    <a-camera position="0 0 0">
+        <a-image
+            id="lostScreen"
+            src="#lostMessage"
+            position="0 0 -2"
+            width="2"
+            height="1"
+            scale="1  0">
+        </a-image>
+    </a-camera>
 
-    <a-camera position="0 0 0"></a-camera>
-     
+<!-- Welcoming QR Codes 1-3 ---------------------------------------------------------------------------------->
     <a-entity mindar-image-target="targetIndex: 0">
-
-        <a-box
-            color="red"
-            scale="0.5 0.5 0.5"
-            position="0 0 0">
-      
-        </a-box>
-
+        <a-image
+            src="#welcome1"
+            position="0 0 0"
+            width="2"
+            height="1">
+        </a-image>
     </a-entity>
-
     <a-entity mindar-image-target="targetIndex: 1">
-
-        <a-box
-            color="blue"
-            scale="0.25 0.25 0.25"
-            position="0 0 0">
-        </a-box>
-
+        <a-image
+            src="#welcome2"
+            position="0 0 0"
+            width="2"
+            height="1">
+        </a-image>
     </a-entity>
-
     <a-entity mindar-image-target="targetIndex: 2">
-
-        <a-box
-            color="green"
-            position="0 0 0">
-        </a-box>
-
+        <a-image
+            src="#welcome3"
+            position="0 0 0"
+            width="2"
+            height="1">
+        </a-image>
     </a-entity>
+    <a-entity mindar-image-target="targetIndex: 3">
+        <a-image
+            src="#welcome4"
+            position="0 0 0"
+            width="2"
+            height="1">
+        </a-image>
+    </a-entity>
+    <a-entity mindar-image-target="targetIndex: 4">
+        <a-image
+            src="#welcome5"
+            position="0 0 0"
+            width="2"
+            height="1">
+        </a-image>
+    </a-entity>
+<!-- Level-1 QR Codes(Find the Library) ---------------------------------------------------------------------------------->
     
 </a-scene>
+<script>
+        let expectedTarget = 0;
+        let xp = 0;
+        const targets = document.querySelectorAll('[mindar-image-target]');
+        targets.forEach((target, index) => {
+
+    target.addEventListener('targetFound', () => {
+
+        console.log(
+            `Scanned Target ${index} | Expected Target ${expectedTarget}`
+        );
+
+        if (index === expectedTarget) {
+
+            console.log('✅ Correct target!');
+            expectedTarget++;
+        } else if (index < expectedTarget) {
+
+            console.log('↩️ Previous target — ignoring');
+
+        } else {
+
+            console.log(
+                `❌ Wrong order! Expected Target ${expectedTarget}`
+            );
+
+            target.querySelector('a-image').setAttribute(
+                'src',
+                '#lostMessage'
+            );
+        }
+    });
+});
+    </script>
 </body>
 </html>
