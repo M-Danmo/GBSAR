@@ -4,16 +4,31 @@
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
-    <style>
-
-        a-scene {
-        width: 100vw;
-        height: 100vh;
-        }
+<style>
+    a-scene { 
+        width: 100vw; 
+        height: 100vh; 
+    } 
+    #lostOverlay { 
+        position: fixed; 
+        inset: 0; 
+        display: none; 
+        justify-content: center; 
+        align-items: center; 
+        z-index: 9999; 
+        pointer-events: none;
+    } 
+    #lostOverlay img { 
+        width: 80%; 
+        max-width: 500px; 
+        height: auto; 
+    } 
 </style>
 
 </head>
 <body>
+
+    <div id="lostOverlay"> <img src="Assets/Lost/lostMessage.png" alt="Wrong target"> </div>
     
     <a-scene
     mindar-image="imageTargetSrc: Targets.mind; maxTrack: 5;"
@@ -22,102 +37,182 @@
     device-orientation-permission-ui="enabled: false">
 
     <a-assets>
-        <img id="lostMessage" src="Assets\Lost\LostMessage.png">
-        <img id="welcome1" src="Assets\Mission1\LocateBloomberg1.png">
-        <img id="welcome2" src="Assets\Mission1\LocateBloomberg2.png">
-        <img id="welcome3" src="Assets\Mission1\LocateBloomberg3.png">
-        <img id="welcome4" src="Assets\Mission1\LocateBloomberg4A.png">
-        <img id="welcome5" src="Assets\Mission1\LocateBloomberg4B.png">
+        <img id="Bloomberg1" src="Assets/Mission1/LocateBloomberg1.png">
+        <img id="Bloomberg2" src="Assets/Mission1/LocateBloomberg2.png">
+        <img id="Bloomberg3" src="Assets/Mission1/LocateBloomberg3.png">
+        <img id="Bloomberg4" src="Assets/Mission1/LocateBloomberg4A.png">
+        <img id="Bloomberg5" src="Assets/Mission1/LocateBloomberg4B.png">
+        <img id="Bloomberg6" src="Assets/Mission1/LocateBloomberg4C.png">
+        <img id="Bloomberg7" src="Assets/Mission1/LocateBloomberg4B.png">
+        <img id="Bloomberg8" src="Assets/Mission1/LocateBloomberg5.png">
+
+        <img id="Bloomberg9" src="Assets/Mission1/LocateBloombergArrival.png">
+        <img id="Bloomberg10" src="Assets/Mission1/BloombergRoomWest.png">
+        <img id="Bloomberg11" src="Assets/Mission1/BloombergRoomEast.png">
+
+        <a-asset-item id="BBKeyboard" src="Assets/Models/bloomberg_desk.glb"></a-asset-item>
+        <a-asset-item id="BBMonitor" src="Assets/Models/bloomberg_monitors.glb"></a-asset-item>
+
     </a-assets>
     
-    <a-camera position="0 0 0">
-        <a-image
-            id="lostScreen"
-            src="#lostMessage"
-            position="0 0 -2"
-            width="2"
-            height="1"
-            scale="1  0">
-        </a-image>
-    </a-camera>
+    
+    <a-camera position="0 0 0"></a-camera>
 
-<!-- Welcoming QR Codes 1-3 ---------------------------------------------------------------------------------->
     <a-entity mindar-image-target="targetIndex: 0">
-        <a-image
-            src="#welcome1"
-            position="0 0 0"
-            width="2"
-            height="1">
-        </a-image>
+        <a-entity class="targetContent">
+            <a-image
+                src="#Bloomberg1"
+                position="0 0 0"
+                width="2"
+                height="1">
+            </a-image>
+        </a-entity>
     </a-entity>
     <a-entity mindar-image-target="targetIndex: 1">
-        <a-image
-            src="#welcome2"
-            position="0 0 0"
-            width="2"
-            height="1">
-        </a-image>
+        <a-entity class="targetContent">
+            <a-image
+                src="#Bloomberg2"
+                position="0 0 0"
+                width="2"
+                height="1">
+            </a-image>
+        </a-entity>
     </a-entity>
     <a-entity mindar-image-target="targetIndex: 2">
-        <a-image
-            src="#welcome3"
-            position="0 0 0"
-            width="2"
-            height="1">
-        </a-image>
+        <a-entity class="targetContent">
+            <a-image
+                src="#Bloomberg3"
+                position="0 0 0"
+                width="2"
+                height="1">
+            </a-image>
+        </a-entity>
     </a-entity>
     <a-entity mindar-image-target="targetIndex: 3">
-        <a-image
-            src="#welcome4"
-            position="0 0 0"
-            width="2"
-            height="1">
-        </a-image>
+        <a-entity class="targetContent">
+            <a-image
+                src="#Bloomberg4"
+                position="0 0 0"
+                width="2"
+                height="1">
+            </a-image>
+        </a-entity>
     </a-entity>
     <a-entity mindar-image-target="targetIndex: 4">
-        <a-image
-            src="#welcome5"
-            position="0 0 0"
-            width="2"
-            height="1">
-        </a-image>
+        <a-entity class="targetContent">
+            <a-image
+                src="#Bloomberg5"
+                position="0 0 0"
+                width="2"
+                height="1">
+            </a-image>
+            <a-gltf-model
+                src="#BBKeyboard"
+                position="0 -1 -2"
+                scale="2 2 2"
+                rotation="45 0 0">
+            </a-gltf-model>
+            <a-gltf-model
+                src="#BBMonitor"
+                position="0 1 -1"
+                scale="2 2 2"
+                rotation="45 0 0">
+            </a-gltf-model>
+        </a-entity>
     </a-entity>
-<!-- Level-1 QR Codes(Find the Library) ---------------------------------------------------------------------------------->
-    
+    <a-entity mindar-image-target="targetIndex: 5">
+        <a-entity class="targetContent">
+            <a-image
+                src="#Bloomberg6"
+                position="0 0 0"
+                width="2"
+                height="1">
+            </a-image>
+        </a-entity>
+    </a-entity>
+    <a-entity mindar-image-target="targetIndex: 6">
+        <a-entity class="targetContent">
+            <a-image
+                src="#Bloomberg7"
+                position="0 0 0"
+                width="2"
+                height="1">
+            </a-image>
+        </a-entity>
+    </a-entity>
+    <a-entity mindar-image-target="targetIndex: 7">
+        <a-entity class="targetContent">
+            <a-image
+                src="#Bloomberg8"
+                position="0 0 0"
+                width="2"
+                height="1">
+            </a-image>
+        </a-entity>
+    </a-entity>
+    <a-entity mindar-image-target="targetIndex: 8">
+        <a-entity class="targetContent">
+            <a-image
+                src="#Bloomberg9"
+                position="0 0 0"
+                width="2"
+                height="1">
+            </a-image>
+        </a-entity>
+    </a-entity>
+    <a-entity mindar-image-target="targetIndex: 9">
+        <a-entity class="targetContent">
+            <a-image
+                src="#Bloomberg10"
+                position="0 0 0"
+                width="2"
+                height="1">
+            </a-image>
+        </a-entity>
+    </a-entity>
+    <a-entity mindar-image-target="targetIndex: 10">
+        <a-entity class="targetContent">
+            <a-image
+                src="#Bloomberg11"
+                position="0 0 0"
+                width="2"
+                height="1">
+            </a-image>
+        </a-entity>
+    </a-entity>
 </a-scene>
 <script>
         let expectedTarget = 0;
         let xp = 0;
+        const lostOverlay = document.querySelector('#lostOverlay');
         const targets = document.querySelectorAll('[mindar-image-target]');
+        
+
         targets.forEach((target, index) => {
+        const content = target.querySelector('.targetContent');
 
-    target.addEventListener('targetFound', () => {
-
-        console.log(
-            `Scanned Target ${index} | Expected Target ${expectedTarget}`
-        );
-
-        if (index === expectedTarget) {
-
-            console.log('✅ Correct target!');
-            expectedTarget++;
-        } else if (index < expectedTarget) {
-
-            console.log('↩️ Previous target — ignoring');
-
-        } else {
-
+        target.addEventListener('targetFound', () => {
             console.log(
-                `❌ Wrong order! Expected Target ${expectedTarget}`
+                `Scanned Target ${index} | Expected Target ${expectedTarget}`
             );
+            if (index === expectedTarget) {
+                console.log('Correct target!');
+                lostOverlay.style.display = 'none';
+                content.setAttribute('visible', true);
+                expectedTarget++;
 
-            target.querySelector('a-image').setAttribute(
-                'src',
-                '#lostMessage'
-            );
-        }
+            } else if (index < expectedTarget) {
+                console.log('Previous target — ignoring');
+                lostOverlay.style.display = 'none';
+
+            } else {
+            content.setAttribute('visible', false); 
+            lostOverlay.style.display = 'flex';
+                
+            }
+            
+        });
     });
-});
     </script>
 </body>
 </html>
